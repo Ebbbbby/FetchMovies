@@ -1,0 +1,33 @@
+*{
+  scroll-behavior:smooth  ;
+}
+
+.app{
+ 
+    color: white;
+    padding-top: 40px;
+    padding-bottom: 70px;
+     
+}
+.pageTitle{
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  font-size: 2vw;
+  padding: 7px 0 1rem 0;
+  border-radius: 50px;
+  color: #fff;
+}
+@media (max-width:70px) {
+  .app{
+    padding-top: 70px;
+  }  
+
+}
+
+@media (max-width:100px) {
+  .pageTitle{
+    font-size: 6.4vw;
+  }  
+
+}
