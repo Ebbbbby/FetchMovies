@@ -7,7 +7,7 @@ import { img_300, noPicture } from "../../../Config/config";
 import './Carousel.css'
 
 const handleDragStart = (e) => e.preventDefault();
-const Carousel = ({ mediaType, id }) => { 
+const Carousel = ({ mediaType, id }) => {
   const [credit, setCredit] = useState();
   const items = credit?.map((c) => (
     <div className="carouselItem">
@@ -33,14 +33,15 @@ const Carousel = ({ mediaType, id }) => {
     },
   }
    useEffect(() => {
-    fetchCredits()   
+     // eslint-disable-next-line react-hooks/exhaustive-deps
+     fetchCredits();
    }, [])
-   
+
   const fetchCredits = async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/${mediaType}/${id}/credits?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
     );
-   
+
     setCredit(data.cast);
   };
   return <AliceCarousel autoPlay responsive={responsive} infinite disableDotsControls disableButtonsControls mouseTracking items={items} />;

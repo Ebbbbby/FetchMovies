@@ -3,7 +3,6 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
@@ -25,11 +24,11 @@ const style = {
 
   bgcolor: "#39445a",
   color: "#fff",
- 
+
 };
 
 export default function ContentModal({ children, mediaType, id }) {
-  
+
   const [open, setOpen] = useState(false);
   const [content, setContent] = useState();
   const [video, setVideo] = useState();
@@ -37,7 +36,9 @@ export default function ContentModal({ children, mediaType, id }) {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchVideo();
   }, []);
 
@@ -47,7 +48,7 @@ export default function ContentModal({ children, mediaType, id }) {
     );
 
     setContent(data);
-   
+
   };
 
   const fetchVideo = async () => {
@@ -79,14 +80,14 @@ export default function ContentModal({ children, mediaType, id }) {
             <div id="transition-modal-description" sx={{}}>
               {content && (
                 <div className="contentModal">
-                  <img className="content_potrait " 
+                  <img className="content_potrait "
                     src={
                       content.poster_path
                         ? `${img_500}/${content.poster_path}`
                         : unavailable
                     }
                     alt = {content.name || content.title}
-                  
+
                   />
                   <img
                     className="contentModal_landscape"
@@ -115,14 +116,14 @@ export default function ContentModal({ children, mediaType, id }) {
                     <Carousel mediaType = {mediaType} id = {id}/>
                     </div>
 
-                    <Button   
+                    <Button
                     variant = "contained"
                     startIcon = {<YouTubeIcon/>}
                     color= "error"
                     target="__blank"
                     href = {`https://www.youtube.com/watch?v=${video}`}
                      >
-                        Watch the Trailer                   
+                        Watch the Trailer
                     </Button>
                   </div>
                 </div>
