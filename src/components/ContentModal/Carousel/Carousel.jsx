@@ -35,7 +35,7 @@ const Carousel = ({ mediaType, id }) => {
    useEffect(() => {
      // eslint-disable-next-line react-hooks/exhaustive-deps
      fetchCredits();
-   }, [])
+   })
 
   const fetchCredits = async () => {
     const { data } = await axios.get(

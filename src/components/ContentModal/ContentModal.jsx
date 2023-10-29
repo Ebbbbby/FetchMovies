@@ -40,7 +40,7 @@ export default function ContentModal({ children, mediaType, id }) {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchVideo();
-  }, []);
+  });
 
   const fetchData = async () => {
     const { data } = await axios.get(
