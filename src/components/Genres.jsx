@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useCallback } from "react";
 import { useEffect } from "react";
 import Chip from "@mui/material/Chip";
 
@@ -22,22 +22,20 @@ const Genres = ({
     setGenres([...genres, genre]);
     setpage(1);
   };
-  const fetchGenres = async () => {
+  const fetchGenres = useCallback (async () => {
     const { data } = await axios.get(
       `https://api.themoviedb.org/3/genre/${type}/list?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
     );
 
     setGenres(data.genres);
-  };
+  }, [setGenres, type]);
 
   useEffect(() => {
-    // eslint-disable-next-line
-    fetchGenres();
+        fetchGenres();
     return () => {
-      // eslint-disable-next-line
       setGenres({});
     };
-  }, []);
+  }, [fetchGenres, setGenres]);
 
   return (
     <div style={{ padding: "6px 0" }}>

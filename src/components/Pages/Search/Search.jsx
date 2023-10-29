@@ -5,7 +5,7 @@ import Tab from "@mui/material/Tab";
 import { Button, createTheme, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
-import { useState,useEffect } from "react";
+import { useState,useEffect,useCallback } from "react";
 import axios from "axios";
 import SingleContent from "../../SingleContent/SingleContent";
 import CustomPagination from "../../Pagination/CustomPagination";
@@ -26,19 +26,25 @@ const Search = () => {
     },
   });
 
-  useEffect(() => {
-    window.scroll(0, 0);
-    // eslint-disable-next-line
-    fetchSearch();
-  }, [type, page])
 
 
- const fetchSearch = async ()=>{
-    const {data} = await axios.get(`https://api.themoviedb.org/3/search/${type?"tv":"movie"}?api_key=${process.env.REACT_APP_API_KEY }&language=en-US&query=${searchText}&page=${page}&include_adult=false`)
+ const fetchSearch = useCallback(async () => {
+   const { data } = await axios.get(
+     `https://api.themoviedb.org/3/search/${type ? "tv" : "movie"}?api_key=${
+       process.env.REACT_APP_API_KEY
+     }&language=en-US&query=${searchText}&page=${page}&include_adult=false`
+   );
 
-    setContent(data.results)
-    setNumOfPages(data.total_pages)
- }
+   setContent(data.results);
+   setNumOfPages(data.total_pages);
+ }, [type, searchText, page]);
+
+
+   useEffect(() => {
+     window.scroll(0, 0);
+     fetchSearch();
+   }, [type, page, fetchSearch]);
+
 
   return (
     <div>
